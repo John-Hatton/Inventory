@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_main"
+        android:title="Main" />
+    <item
+        android:id="@+id/nav_add_edit"
+        android:title="Add/Edit Item" />
+    <item
+        android:id="@+id/nav_camera"
+        android:title="Camera" />
+    <item
+        android:id="@+id/nav_image_gallery"
+        android:title="Image Gallery" />
+    <item
+        android:id="@+id/nav_add_category"
+        android:title="Manage Categories" />
+</menu>

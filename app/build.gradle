@@ -1,0 +1,92 @@
+plugins {
+    id 'com.android.application'
+    // id 'kotlin-android' // Uncomment if you're using Kotlin
+}
+
+android {
+    compileSdk 34
+    namespace "com.hattonky.inventory"
+
+    defaultConfig {
+        applicationId "com.hattonky.inventory"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "0.0.6"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "io.cucumber.android.CucumberAndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+        animationsDisabled = true
+    }
+}
+
+dependencies {
+    // AndroidX libraries
+    implementation libs.appcompat
+    implementation libs.constraintlayout
+    implementation libs.material
+    implementation libs.androidx.recyclerview
+
+    // Room components
+    implementation libs.androidx.room.runtime
+    implementation libs.androidx.drawerlayout
+    testImplementation libs.androidx.core
+    testImplementation libs.espresso.core
+    testImplementation libs.ext.junit
+    annotationProcessor libs.androidx.room.compiler
+
+    // ViewModel and LiveData
+    implementation libs.androidx.lifecycle.extensions
+    annotationProcessor libs.androidx.lifecycle.compiler
+
+    // CameraX dependencies
+    implementation libs.androidx.camera.core
+    implementation libs.androidx.camera.camera2
+    implementation libs.androidx.camera.lifecycle
+    implementation libs.camera.view
+    implementation libs.androidx.camera.extensions
+
+    // Glide for image loading
+    implementation libs.glide
+    annotationProcessor libs.compiler
+
+    // Testing libraries (optional)
+    // Unit Testing
+    testImplementation libs.junit
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.inline
+    testImplementation libs.androidx.core.testing // For LiveData testing
+    testImplementation libs.byte.buddy
+    androidTestImplementation libs.mockito.android
+
+    // Instrumentation Testing
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.androidx.rules
+    androidTestImplementation libs.androidx.runner
+    androidTestImplementation libs.androidx.core.testing // For LiveData testing
+
+
+    // Cucumber Android dependencies
+    androidTestImplementation libs.cucumber.android
+    androidTestImplementation libs.cucumber.picocontainer
+
+    // Espresso for UI testing
+    androidTestImplementation libs.androidx.espresso.intents
+
+}

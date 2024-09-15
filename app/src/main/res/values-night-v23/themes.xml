@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme for night mode -->
+    <style name="Theme.Inventory" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here -->
+
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/gray_800</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+
+        <!-- Secondary colors (blue for button color) -->
+        <item name="colorSecondary">@color/blue_400</item>
+        <item name="colorSecondaryVariant">@color/blue_600</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+
+        <!-- Button color customization -->
+        <item name="colorButtonNormal">@color/blue_400</item>
+        <item name="android:textColor">@android:color/white</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/black</item>
+
+        <!-- Other customizations -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>
