@@ -70,7 +70,7 @@ public class ApiClient {
                 .add("password", password)
                 .build();
         Request request = new Request.Builder()
-                .url(baseUrl + "auth/login")
+                .url(baseUrl + "api/auth/login")
                 .post(formBody)
                 .build();
         OkHttpClient safeClient = getSafeClient(context);
@@ -107,7 +107,7 @@ public class ApiClient {
             android.util.Log.d("ApiClient", "Register request body: " + sb.toString());
         }
         Request request = new Request.Builder()
-                .url(baseUrl + "auth/register")
+                .url(baseUrl + "api/auth/register")
                 .post(formBody)
                 .build();
         OkHttpClient safeClient = getSafeClient(context);
