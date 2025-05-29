@@ -1,6 +1,8 @@
 package com.hattonky.inventory;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +24,8 @@ import com.hattonky.inventory.activities.AddEditItemActivity;
 import com.hattonky.inventory.activities.CameraActivity;
 import com.hattonky.inventory.activities.AddCategoryActivity;
 import com.hattonky.inventory.activities.ImageGalleryActivity;
+import com.hattonky.inventory.activities.LoginActivity;
+import com.hattonky.inventory.activities.ServerConfigActivity;
 import com.hattonky.inventory.adapters.ItemAdapter;
 import com.hattonky.inventory.data.model.Category;
 import com.hattonky.inventory.data.model.Item;
@@ -44,6 +48,18 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getSharedPreferences("auth", Context.MODE_PRIVATE);
+        String serverUrl = prefs.getString("server_url", null);
+        String jwt = prefs.getString("jwt", null);
+        if (serverUrl == null || serverUrl.isEmpty()) {
+            startActivity(new Intent(this, ServerConfigActivity.class));
+            finish();
+            return;
+        } else if (jwt == null || jwt.isEmpty()) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_main);
 
         // Initialize Toolbar and Drawer
@@ -137,6 +153,19 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
             } else if (id == R.id.nav_image_gallery) {
                 Intent imageGalleryIntent = new Intent(MainActivity.this, ImageGalleryActivity.class);
                 startActivity(imageGalleryIntent);
+                return true;
+            } else if (id == R.id.nav_user_management) {
+                Intent userMgmtIntent = new Intent(MainActivity.this, com.hattonky.inventory.activities.UserManagementActivity.class);
+                startActivity(userMgmtIntent);
+                return true;
+            } else if (id == R.id.nav_logout) {
+                // Clear auth data and go to LoginActivity
+                SharedPreferences prefs = getSharedPreferences("auth", Context.MODE_PRIVATE);
+                prefs.edit().remove("jwt").remove("role").apply();
+                Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(logoutIntent);
+                finish();
                 return true;
             }
             return false;
